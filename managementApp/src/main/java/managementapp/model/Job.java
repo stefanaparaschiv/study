@@ -1,4 +1,4 @@
-package managementapp.model.util;
+package managementapp.model;
 
 public enum Job {
 	COOK,

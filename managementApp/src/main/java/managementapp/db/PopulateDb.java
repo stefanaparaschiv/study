@@ -6,8 +6,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import managementapp.model.Employee;
+import managementapp.model.Job;
 import managementapp.model.Menu;
-import managementapp.model.util.Job;
 import managementapp.repository.EmployeeRepository;
 import managementapp.repository.MenuRepository;
 

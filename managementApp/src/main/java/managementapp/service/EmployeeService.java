@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import managementapp.model.Employee;
-import managementapp.model.util.Job;
+import managementapp.model.Job;
 
 
 public interface EmployeeService {
