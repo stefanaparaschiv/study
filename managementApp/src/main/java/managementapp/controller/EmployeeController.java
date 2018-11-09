@@ -45,12 +45,12 @@ public class EmployeeController {
 		if (firstName == null && lastName != null) {
 			empList = employeeService.findByLastName(lastName);
 		} else if (lastName == null && firstName != null) {
-			empList = employeeService.findByFirstName(lastName);
+			empList = employeeService.findByFirstName(firstName);
 		} else if (firstName != null && lastName != null) {
 			empList = employeeService.findByFullName(firstName, lastName);
 		}
 		if (empList == null || empList.size() == 0) {
-			throw new NotFoundException("No employees with name=" + firstName + "" + lastName + " were found");
+			throw new NotFoundException("No employees were found");
 		}
 		return empList;
 	}

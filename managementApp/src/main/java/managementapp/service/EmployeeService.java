@@ -24,6 +24,6 @@ public interface EmployeeService {
 
 	public Employee create(Employee emp);
 
-	public List<Employee> findByFirstName(String lastName);
+	public List<Employee> findByFirstName(String firstName);
 
 }

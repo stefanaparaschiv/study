@@ -1,9 +1,8 @@
 package managementapp.model;
 
 public enum Job {
-	COOK,
-	VENDOR;
-	
+	COOK, VENDOR;
+
 	public static boolean containsString(String string) {
 
 		for (Job job : Job.values()) {
@@ -11,7 +10,6 @@ public enum Job {
 				return true;
 			}
 		}
-
 		return false;
 	}
 }
