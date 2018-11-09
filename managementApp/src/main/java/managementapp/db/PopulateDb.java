@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import managementapp.model.Course;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 import managementapp.model.Menu;
@@ -24,33 +25,44 @@ public class PopulateDb implements ApplicationRunner {
 	@Autowired
 	private MenuRepository menuRepo;
 
+	private Menu menu;
+
+	private Menu kidsMenu;
+
 	@Override
 	public void run(ApplicationArguments args) {
-		List<String> ingredients = createIngredientsList();
-		List<String> kidsIngredients = createKidsIngredientsList();
+		List<Course> courses = createCourseList();
+		List<Course> kidsCourses = createKidsCourseList();
+		menu = new Menu("Kids", 10, Type.REGULAR, kidsCourses);
+		kidsMenu = new Menu("Menu of the day", 30, Type.VEGETARIAN, courses);
 		empRepo.save(new Employee("Ioana", "Popa", Job.COOK));
 		empRepo.save(new Employee("Ana", "Popa", Job.VENDOR));
 		empRepo.save(new Employee("Andrei", "Mihai", Job.COOK));
 		empRepo.save(new Employee("David", "Luca", Job.VENDOR));
 		empRepo.save(new Employee("George", "Morosac", Job.VENDOR));
-		menuRepo.save(new Menu("Kids", 10, Type.REGULAR, kidsIngredients));
-		menuRepo.save(new Menu("Menu of the day", 30, Type.VEGETARIAN, ingredients));
+		menuRepo.save(new Menu("Kids", 10, Type.REGULAR, kidsCourses));
+		menuRepo.save(new Menu("Menu of the day", 30, Type.VEGETARIAN, courses));
 
 	}
 
-	private List<String> createIngredientsList() {
-		List<String> ingredients = new ArrayList<String>();
-		ingredients.add("bread");
-		ingredients.add("tomato salad");
-		ingredients.add("fries");
-		return ingredients;
+	private List<Course> createCourseList() {
+		Course course = new Course("tomato soup", 100);
+		Course mainCourse = new Course("halloumi burger", 300);
+		List<Course> courses = new ArrayList<Course>();
+		courses.add(course);
+		courses.add(mainCourse);
+		return courses;
 	}
 
-	private List<String> createKidsIngredientsList() {
-		List<String> ingredients = new ArrayList<String>();
-		ingredients.add("burger");
-		ingredients.add("cookie");
-		return ingredients;
+	private List<Course> createKidsCourseList() {
+		Course course = new Course("chicken soup", 100);
+		Course mainCourse = new Course("pizza", 400);
+		Course desert = new Course("chocolate cake", 300);
+		List<Course> courses = new ArrayList<Course>();
+		courses.add(course);
+		courses.add(mainCourse);
+		courses.add(desert);
+		return courses;
 	}
 
 }

@@ -42,8 +42,8 @@ public class MenuController {
 
 	@GetMapping("/price")
 	public List<Menu> findByPriceBelow(
-			@RequestParam(name = "price", required = false, defaultValue = "1000") int price) {
-		return menuService.findByPriceBelowLimit(price);
+			@RequestParam(name = "limit", required = false, defaultValue = "1000") int limit) {
+		return menuService.findByPriceBelowLimit(limit);
 	}
 
 	@GetMapping("/type/{type}")

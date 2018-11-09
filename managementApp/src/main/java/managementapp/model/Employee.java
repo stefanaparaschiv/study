@@ -8,10 +8,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = Employee.TABLE_NAME)
 public class Employee {
 
+	public static final String TABLE_NAME = "EMPLOYEE";
+	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

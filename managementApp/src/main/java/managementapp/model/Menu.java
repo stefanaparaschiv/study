@@ -2,18 +2,23 @@ package managementapp.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = Menu.TABLE_NAME)
 public class Menu {
 
+	public static final String TABLE_NAME = "MENU";
+	
 	public Menu(String name, Integer price, Type type) {
 		super();
 		this.name = name;
@@ -21,12 +26,12 @@ public class Menu {
 		this.type = type;
 	}
 
-	public Menu(String name, Integer price, Type type, List<String> ingredients) {
+	public Menu(String name, Integer price, Type type, List<Course> courses) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.type = type;
-		this.ingredients = ingredients;
+		this.courses = courses;
 	}
 
 	public Menu() {
@@ -47,16 +52,15 @@ public class Menu {
 	@Enumerated(EnumType.STRING)
 	private Type type;
 
-	@Column(name = "INGREDIENTS")
-	@ElementCollection
-	private List<String> ingredients;
+	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Course> courses;
 
-	public List<String> getIngredients() {
-		return ingredients;
+	public List<Course> getCourses() {
+		return courses;
 	}
 
-	public void setIngredients(List<String> ingredients) {
-		this.ingredients = ingredients;
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	public String getName() {
