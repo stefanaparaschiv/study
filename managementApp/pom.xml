@@ -6,7 +6,7 @@
 
 	<groupId>managementApp</groupId>
 	<artifactId>managementApp</artifactId>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,7 +43,6 @@
 		<dependency>
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
-    <version>42.2.5</version>
 </dependency>
 	</dependencies>
 

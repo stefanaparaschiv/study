@@ -1,2 +1,6 @@
 managementapp\repository\EmployeeRepositoryTests.class
+managementapp\service\MenuServiceTest.class
+managementapp\service\EmployeeServiceTest$ContextConfiguration.class
 managementapp\repository\MenuRepositoryTest.class
+managementapp\service\EmployeeServiceTest.class
+managementapp\service\MenuServiceTest$ContextConfiguration.class
