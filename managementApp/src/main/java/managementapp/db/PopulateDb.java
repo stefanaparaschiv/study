@@ -33,8 +33,8 @@ public class PopulateDb implements ApplicationRunner {
 		empRepo.save(new Employee("Andrei", "Mihai", Job.COOK));
 		empRepo.save(new Employee("David", "Luca", Job.VENDOR));
 		empRepo.save(new Employee("George", "Morosac", Job.VENDOR));
-		menuRepo.save(new Menu("Kids", 10L, Type.REGULAR, kidsIngredients));
-		menuRepo.save(new Menu("Menu of the day", 30L, Type.VEGETARIAN, ingredients));
+		menuRepo.save(new Menu("Kids", 10, Type.REGULAR, kidsIngredients));
+		menuRepo.save(new Menu("Menu of the day", 30, Type.VEGETARIAN, ingredients));
 
 	}
 

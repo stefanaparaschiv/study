@@ -14,14 +14,14 @@ import javax.persistence.Id;
 @Entity
 public class Menu {
 
-	public Menu(String name, Long price, Type type) {
+	public Menu(String name, Integer price, Type type) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Menu(String name, Long price, Type type, List<String> ingredients) {
+	public Menu(String name, Integer price, Type type, List<String> ingredients) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -41,7 +41,7 @@ public class Menu {
 	private String name;
 
 	@Column(name = "PRICE")
-	private Long price;
+	private Integer price;
 
 	@Column(name = "TYPE")
 	@Enumerated(EnumType.STRING)
@@ -67,11 +67,11 @@ public class Menu {
 		this.name = name;
 	}
 
-	public Long getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 

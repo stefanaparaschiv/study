@@ -32,8 +32,8 @@ public class MenuRepositoryTest {
 	@Before
 	public void setUp() {
 
-		menu = new Menu("Kids", 10L, Type.REGULAR);
-		menu2  = new Menu("Kids", 10L, Type.REGULAR);
+		menu = new Menu("Kids", 10, Type.REGULAR);
+		menu2  = new Menu("Kids", 10, Type.REGULAR);
 		entityManager.persist(menu);
 		entityManager.persist(menu2);
 

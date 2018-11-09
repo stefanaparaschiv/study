@@ -12,7 +12,7 @@ public interface MenuService {
 	
 	public List<Menu> findByMenuName(String name);
 	
-	public List<Menu> findByPriceBelowLimit(Long priceLimit);
+	public List<Menu> findByPriceBelowLimit(int i);
 	
 	public Iterable<Menu> getAll();
 	
