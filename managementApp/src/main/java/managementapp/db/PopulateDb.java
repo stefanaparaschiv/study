@@ -40,7 +40,7 @@ public class PopulateDb implements ApplicationRunner {
 
 	private List<String> createIngredientsList() {
 		List<String> ingredients = new ArrayList<String>();
-		ingredients.add("meat");
+		ingredients.add("bread");
 		ingredients.add("tomato salad");
 		ingredients.add("fries");
 		return ingredients;

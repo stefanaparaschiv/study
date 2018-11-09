@@ -2,6 +2,7 @@ package managementapp.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import managementapp.model.Menu;
@@ -13,6 +14,7 @@ public class MenuServiceImpl implements MenuService {
 
 	private MenuRepository menuRepository;
 
+	@Autowired
 	public MenuServiceImpl(MenuRepository menuRepository) {
 		this.menuRepository = menuRepository;
 	}
@@ -35,6 +37,11 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<Menu> findByType(String type) {
 		return menuRepository.findByType(type);
+	}
+
+	@Override
+	public Menu create(Menu menu) {
+		return menuRepository.save(menu);
 	}
 
 }

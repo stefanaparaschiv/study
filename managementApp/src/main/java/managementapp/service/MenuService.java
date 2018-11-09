@@ -18,4 +18,6 @@ public interface MenuService {
 	
 	public List<Menu> findByType(String type);
 
+	public Menu create(Menu menu);
+
 }

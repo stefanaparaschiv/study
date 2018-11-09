@@ -16,6 +16,9 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	List<Employee> findByLastName(String lastName);
 
+	List<Employee> findByFirstName(String firstName);
+	
 	@Query(value = "SELECT * FROM EMPLOYEE e WHERE UPPER(e.job) = :job", nativeQuery = true)
 	Collection<Employee> findByJob(String job);
+
 }
