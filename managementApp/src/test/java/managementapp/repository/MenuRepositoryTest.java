@@ -25,17 +25,17 @@ public class MenuRepositoryTest {
 
 	@Autowired
 	private MenuRepository menuRepository;
-	
+
 	private Menu menu;
-	private Menu menu2;
+	private Menu kidsMenu;
 
 	@Before
 	public void setUp() {
 
 		menu = new Menu("Kids", 10, Type.REGULAR);
-		menu2  = new Menu("Kids", 10, Type.REGULAR);
+		kidsMenu = new Menu("Kids", 10, Type.REGULAR);
 		entityManager.persist(menu);
-		entityManager.persist(menu2);
+		entityManager.persist(kidsMenu);
 
 	}
 
@@ -52,9 +52,7 @@ public class MenuRepositoryTest {
 
 		List<Menu> findByName = menuRepository.findByType("REGULAR");
 
-		assertThat(findByName).extracting(Menu::getType).containsOnly(menu2.getType());
+		assertThat(findByName).extracting(Menu::getType).containsOnly(kidsMenu.getType());
 	}
-	
-	
 
 }

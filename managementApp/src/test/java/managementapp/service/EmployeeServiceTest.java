@@ -24,7 +24,7 @@ import managementapp.service.impl.EmployeeServiceImpl;
 @RunWith(SpringRunner.class)
 public class EmployeeServiceTest {
 
-	private static EmployeeRepository employeeRepository=mock(EmployeeRepository.class);
+	private static EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
 
 	@TestConfiguration
 	static class ContextConfiguration {
