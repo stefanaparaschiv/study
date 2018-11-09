@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import managementapp.model.Employee;
 import managementapp.model.Menu;
 import managementapp.repository.MenuRepository;
 import managementapp.service.MenuService;
@@ -15,8 +14,8 @@ public class MenuServiceImpl implements MenuService {
 	private MenuRepository menuRepository;
 
 	public MenuServiceImpl(MenuRepository menuRepository) {
-       this.menuRepository=menuRepository;
-    }
+		this.menuRepository = menuRepository;
+	}
 
 	@Override
 	public List<Menu> findByMenuName(String name) {
@@ -27,10 +26,15 @@ public class MenuServiceImpl implements MenuService {
 	public List<Menu> findByPriceBelowLimit(Long priceLimit) {
 		return menuRepository.findByPriceBelow(priceLimit);
 	}
-	
+
 	@Override
 	public Iterable<Menu> getAll() {
 		return menuRepository.findAll();
+	}
+
+	@Override
+	public List<Menu> findByType(String type) {
+		return menuRepository.findByType(type);
 	}
 
 }

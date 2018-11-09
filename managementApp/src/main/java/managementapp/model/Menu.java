@@ -1,6 +1,12 @@
 package managementapp.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,23 +14,50 @@ import javax.persistence.Id;
 @Entity
 public class Menu {
 
-	public Menu(String name, Long price) {
+	public Menu(String name, Long price, Type type) {
 		super();
 		this.name = name;
 		this.price = price;
+		this.type = type;
 	}
-	
+
+	public Menu(String name, Long price, Type type, List<String> ingredients) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.ingredients = ingredients;
+	}
+
 	public Menu() {
 		super();
 	}
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-	
-    private String name;
-    
-    private Long price;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "NAME")
+	private String name;
+
+	@Column(name = "PRICE")
+	private Long price;
+
+	@Column(name = "TYPE")
+	@Enumerated(EnumType.STRING)
+	private Type type;
+
+	@Column(name = "INGREDIENTS")
+	@ElementCollection
+	private List<String> ingredients;
+
+	public List<String> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<String> ingredients) {
+		this.ingredients = ingredients;
+	}
 
 	public String getName() {
 		return name;
@@ -41,6 +74,13 @@ public class Menu {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	
-    
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 }

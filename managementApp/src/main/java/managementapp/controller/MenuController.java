@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import managementapp.exceptions.BadRequestException;
 import managementapp.model.Menu;
+import managementapp.model.Type;
 import managementapp.service.MenuService;
 
 @RestController
@@ -35,4 +37,11 @@ public class MenuController {
 		return menuService.findByPriceBelowLimit(price);
 	}
 
+	@GetMapping("/menus/{type}")
+	public List<Menu> findByType(@PathVariable(value = "type") String type) throws BadRequestException {
+		if (!Type.containsString(type)) {
+			throw new BadRequestException("Incorrect value provided for menu type");
+		}
+		return menuService.findByType(type);
+	}
 }

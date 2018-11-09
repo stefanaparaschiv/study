@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 
-@Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	List<Employee> findByFirstNameAndLastName(String firstName, String lastName);

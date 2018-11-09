@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import managementapp.model.Employee;
 import managementapp.model.Menu;
+import managementapp.model.Type;
 
 public interface MenuService {
 	
@@ -14,5 +15,7 @@ public interface MenuService {
 	public List<Menu> findByPriceBelowLimit(Long priceLimit);
 	
 	public Iterable<Menu> getAll();
+	
+	public List<Menu> findByType(String type);
 
 }
