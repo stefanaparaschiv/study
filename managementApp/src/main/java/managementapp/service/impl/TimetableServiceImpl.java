@@ -1,5 +1,6 @@
 package managementapp.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class TimetableServiceImpl implements TimetableService {
 	@Override
 	public List<Timetable> findByName(String name) {
 		return timetableRepository.findByName(name);
+	}
+
+	@Override
+	public Iterable<Timetable> getAll() {
+		return timetableRepository.findAll();
 	}
 
 }

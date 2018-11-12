@@ -28,4 +28,9 @@ public class TimetableController {
 		return timetableService.findByName(name);
 	}
 	
+	@GetMapping()
+	public Iterable<Timetable> findAll() {
+		return timetableService.getAll();
+	}
+	
 }
