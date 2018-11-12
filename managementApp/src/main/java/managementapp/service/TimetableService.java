@@ -1,0 +1,12 @@
+package managementapp.service;
+
+import java.util.List;
+
+import managementapp.model.Timetable;
+
+public interface TimetableService {
+
+	public List<Timetable> findByName(String name);
+	
+	
+}

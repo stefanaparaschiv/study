@@ -12,9 +12,11 @@ import managementapp.model.Course;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 import managementapp.model.Menu;
+import managementapp.model.Timetable;
 import managementapp.model.Type;
 import managementapp.repository.EmployeeRepository;
 import managementapp.repository.MenuRepository;
+import managementapp.repository.TimetableRepository;
 
 @Component
 public class PopulateDb implements ApplicationRunner {
@@ -24,6 +26,9 @@ public class PopulateDb implements ApplicationRunner {
 
 	@Autowired
 	private MenuRepository menuRepo;
+
+	@Autowired
+	private TimetableRepository timetableRepo;
 
 	private Menu menu;
 
@@ -42,7 +47,8 @@ public class PopulateDb implements ApplicationRunner {
 		empRepo.save(new Employee("George", "Morosac", Job.VENDOR));
 		menuRepo.save(new Menu("Kids", 10, Type.REGULAR, kidsCourses));
 		menuRepo.save(new Menu("Menu of the day", 30, Type.VEGETARIAN, courses));
-
+		timetableRepo.save(new Timetable("09.00", "18.00", "Monday-Friday"));
+		timetableRepo.save(new Timetable("11.00", "16.00", "Holiday"));
 	}
 
 	private List<Course> createCourseList() {
