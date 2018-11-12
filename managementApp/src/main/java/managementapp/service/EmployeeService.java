@@ -22,7 +22,7 @@ public interface EmployeeService {
 
 	public Collection<Employee> findByJob(String job);
 
-	public Employee create(Employee emp);
+	public Employee save(Employee emp);
 
 	public List<Employee> findByFirstName(String firstName);
 

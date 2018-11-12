@@ -1,10 +1,12 @@
 package managementapp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import managementapp.model.Employee;
 import managementapp.model.Menu;
 import managementapp.repository.MenuRepository;
 import managementapp.service.MenuService;
@@ -40,8 +42,13 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public Menu create(Menu menu) {
+	public Menu save(Menu menu) {
 		return menuRepository.save(menu);
+	}
+
+	@Override
+	public Optional<Menu> findById(Long id) {
+		return menuRepository.findById(id);
 	}
 
 }

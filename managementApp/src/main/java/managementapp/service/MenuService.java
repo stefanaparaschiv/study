@@ -1,12 +1,9 @@
 package managementapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
-import managementapp.model.Employee;
 import managementapp.model.Menu;
-import managementapp.model.Type;
 
 public interface MenuService {
 	
@@ -18,6 +15,8 @@ public interface MenuService {
 	
 	public List<Menu> findByType(String type);
 
-	public Menu create(Menu menu);
+	public Menu save(Menu menu);
+	
+	public Optional<Menu> findById(Long id);
 
 }
