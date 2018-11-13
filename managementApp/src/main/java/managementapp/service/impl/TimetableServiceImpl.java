@@ -30,4 +30,9 @@ public class TimetableServiceImpl implements TimetableService {
 		return timetableRepository.findAll();
 	}
 
+	@Override
+	public List<Timetable> findTimetableWithClosingHourBefore(int hour) {
+		return timetableRepository.findTimetableWithClosingHourBefore(hour);
+	}
+
 }
