@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee create(Employee emp) {
+	public Employee save(Employee emp) {
 		return employeeRepository.save(emp);
 	}
 
