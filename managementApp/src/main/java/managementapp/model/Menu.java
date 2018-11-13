@@ -52,7 +52,7 @@ public class Menu {
 	@Enumerated(EnumType.STRING)
 	private Type type;
 
-	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Course> courses;
 
 	public List<Course> getCourses() {
