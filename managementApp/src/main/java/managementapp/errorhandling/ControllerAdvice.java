@@ -1,5 +1,7 @@
-package managementapp.controller.errorhandling;
+package managementapp.errorhandling;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,9 +14,12 @@ import managementapp.exceptions.NotFoundException;
 @RestControllerAdvice
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
+	static final Logger LOGGER = LoggerFactory.getLogger(ControllerAdvice.class);
+	
 	@ExceptionHandler(NotFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public ErrorDto handleNotFoundException(NotFoundException ex) {
+		LOGGER.error("Exception thrown: ", ex);
 		return this.generateErrorDto(HttpStatus.NOT_FOUND, ex);
 	}
 
@@ -27,10 +32,12 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorDto defaultHandler(Exception ex) {
+		LOGGER.error("Exception thrown: ", ex);
 		return new ErrorDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
 	}
 
 	private ErrorDto generateErrorDto(HttpStatus status, Exception ex) {
+		LOGGER.error("Exception thrown: ", ex);
 		return new ErrorDto(status.value(), ex.getMessage());
 	}
 }

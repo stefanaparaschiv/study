@@ -1,4 +1,4 @@
-package managementapp.controller.errorhandling;
+package managementapp.errorhandling;
 
 public class ErrorDto {
 
