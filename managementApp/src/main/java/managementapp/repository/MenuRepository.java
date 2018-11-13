@@ -19,4 +19,5 @@ public interface MenuRepository extends CrudRepository<Menu, Long> {
 	@Query(value = "SELECT * FROM Menu m WHERE UPPER(m.type) = :type",nativeQuery = true)
 	public List<Menu> findByType(String type);	
 	
+	
 }

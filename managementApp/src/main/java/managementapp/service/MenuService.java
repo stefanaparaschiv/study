@@ -19,4 +19,6 @@ public interface MenuService {
 	
 	public Optional<Menu> findById(Long id);
 
+	public List<Menu> findDietMenusBelow(int kaloriesLimit);
+
 }

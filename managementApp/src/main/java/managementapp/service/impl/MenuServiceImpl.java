@@ -1,11 +1,14 @@
 package managementapp.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import managementapp.model.Course;
 import managementapp.model.Employee;
 import managementapp.model.Menu;
 import managementapp.repository.MenuRepository;
@@ -49,6 +52,23 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Optional<Menu> findById(Long id) {
 		return menuRepository.findById(id);
+	}
+
+	@Override
+	public List<Menu> findDietMenusBelow(int kaloriesLimit) {
+		Iterable<Menu> menus = getAll();
+		int kalories = 0;
+		List<Menu> dietMenus = new ArrayList<Menu>();
+		for (Menu menu : menus) {
+			for (Course course : menu.getCourses()) {
+				kalories += course.getKalories();
+			}
+			if (kalories <= kaloriesLimit) {
+				dietMenus.add(menu);
+			}
+			kalories = 0;
+		}
+		return dietMenus;
 	}
 
 }

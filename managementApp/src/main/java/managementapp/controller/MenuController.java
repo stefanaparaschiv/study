@@ -82,4 +82,9 @@ public class MenuController {
 		return menuService.save(existingMenu);
 	}
 
+	@GetMapping("/diet")
+	public List<Menu> findDietMenusBelow(@RequestParam(name = "kaloriesLimit", required = true) int kaloriesLimit) {
+		return menuService.findDietMenusBelow(kaloriesLimit);
+	}
+
 }
