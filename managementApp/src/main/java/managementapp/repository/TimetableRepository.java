@@ -12,6 +12,6 @@ public interface TimetableRepository extends CrudRepository<Timetable, Long> {
 	public List<Timetable> findByName(String name);
 
 	@Query(value = "SELECT * FROM Timetable t WHERE CAST(LEFT(t.CLOSING_HOURS, 2) AS INT) >=:hour", nativeQuery = true)
-	public List<Timetable> findTimetableWithClosingHourBefore(int hour);
+	public List<Timetable> findTimetableWithClosingHourAfter(int hour);
 
 }

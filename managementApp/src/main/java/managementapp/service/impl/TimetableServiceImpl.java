@@ -31,8 +31,8 @@ public class TimetableServiceImpl implements TimetableService {
 	}
 
 	@Override
-	public List<Timetable> findTimetableWithClosingHourBefore(int hour) {
-		return timetableRepository.findTimetableWithClosingHourBefore(hour);
+	public List<Timetable> findTimetableWithClosingHourAfter(int hour) {
+		return timetableRepository.findTimetableWithClosingHourAfter(hour);
 	}
 
 }

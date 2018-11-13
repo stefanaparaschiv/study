@@ -35,8 +35,8 @@ public class TimetableController {
 	}
 	
 	@GetMapping("/search")
-	public List<Timetable> findTimetablesWithClosingHourBefore(@RequestParam(name = "hour", required = true) int hour) {
-		return timetableService.findTimetableWithClosingHourBefore(hour);
+	public List<Timetable> findTimetablesWithClosingHourAfter(@RequestParam(name = "hour", required = true) int hour) {
+		return timetableService.findTimetableWithClosingHourAfter(hour);
 	}
 	
 }

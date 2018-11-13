@@ -10,6 +10,6 @@ public interface TimetableService {
 
 	public Iterable<Timetable> getAll();
 	
-	public List<Timetable> findTimetableWithClosingHourBefore(int hour);
+	public List<Timetable> findTimetableWithClosingHourAfter(int hour);
 	
 }
