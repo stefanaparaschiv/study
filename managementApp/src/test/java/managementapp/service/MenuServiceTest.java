@@ -45,7 +45,7 @@ public class MenuServiceTest {
 		List<Menu> menus = new ArrayList<Menu>();
 		menus.add(new Menu("Monday", 10, Type.VEGETARIAN));
 		Mockito.when(menuRepository.findByPriceBelow(ArgumentMatchers.anyInt())).thenReturn(menus);
-		List<Menu> results = menuService.findByPriceBelowLimit(30);
+		List<MenuDTO> results = menuService.findByPriceBelowLimit(30);
 		assertEquals(results.size(), 1);
 		assertTrue(results.equals(menus));
 	}
