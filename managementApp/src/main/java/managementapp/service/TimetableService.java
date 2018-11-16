@@ -6,9 +6,9 @@ import managementapp.model.Timetable;
 
 public interface TimetableService {
 
-	public List<Timetable> findByName(String name);
+	public List<Timetable> findByTimetableName(String name);
 
-	public Iterable<Timetable> getAll();
+	public Iterable<Timetable> getAllTimetables();
 	
 	public List<Timetable> findTimetableWithClosingHourAfter(int hour);
 	

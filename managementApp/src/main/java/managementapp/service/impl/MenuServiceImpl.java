@@ -56,7 +56,7 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public List<Menu> findDietMenusBelow(int kaloriesLimit) {
-		Iterable<Menu> menus = getAll();
+		Iterable<Menu> menus = this.getAll();
 		int kalories = 0;
 		List<Menu> dietMenus = new ArrayList<Menu>();
 		for (Menu menu : menus) {

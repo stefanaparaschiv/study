@@ -42,7 +42,7 @@ public class TimetableServiceTest {
 		List<Timetable> timetables = new ArrayList<Timetable>();
 		timetables.add(new Timetable("09.00", "18.00", "Holiday"));
 		Mockito.when(timetableRepository.findByName(ArgumentMatchers.anyString())).thenReturn(timetables);
-		List<Timetable> results = timetableService.findByName("Holiday");
+		List<Timetable> results = timetableService.findByTimetableName("Holiday");
 		assertEquals(results.size(), 1);
 		assertTrue(results.equals(timetables));
 	}

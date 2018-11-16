@@ -6,8 +6,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "managementapp.service", "managementapp.db", "managementapp.service.impl",
-		"managementapp.repository", "managementapp.controller" })
+@ComponentScan(basePackages = { "review.service", "review.db", "review.service.impl",
+		"review.repository", "review.controller" })
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

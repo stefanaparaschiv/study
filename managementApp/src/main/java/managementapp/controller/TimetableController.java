@@ -26,12 +26,12 @@ public class TimetableController {
 	
 	@GetMapping("/{name}")
 	public List<Timetable> findByName(@PathVariable(value = "name") String name) {
-		return timetableService.findByName(name);
+		return timetableService.findByTimetableName(name);
 	}
 	
 	@GetMapping()
 	public Iterable<Timetable> findAll() {
-		return timetableService.getAll();
+		return timetableService.getAllTimetables();
 	}
 	
 	@GetMapping("/search")
