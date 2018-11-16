@@ -6,24 +6,26 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import managementapp.builder.EmployeeDTO;
+import managementapp.exceptions.NotFoundException;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 
 
 public interface EmployeeService {
 
-	public List<Employee> findByLastName(String lastName);
+	public List<EmployeeDTO> findByLastName(String lastName);
 
-	public Iterable<Employee> getAll();
+	public List<EmployeeDTO> getAll();
 
-	public List<Employee> findByFullName(String firstName,String lastName);
+	public List<EmployeeDTO> findByFullName(String firstName,String lastName);
 
-	public Optional<Employee> findById(Long id);
+	public EmployeeDTO findById(Long id) throws NotFoundException;
 
-	public Collection<Employee> findByJob(String job);
+	public Collection<EmployeeDTO> findByJob(String job);
 
-	public Employee save(Employee emp);
+	public Employee save(EmployeeDTO empDTO);
 
-	public List<Employee> findByFirstName(String firstName);
+	public List<EmployeeDTO> findByFirstName(String firstName);
 
 }

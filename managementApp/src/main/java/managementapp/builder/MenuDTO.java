@@ -58,13 +58,54 @@ public class MenuDTO {
 		}
 
 		public MenuDTO build() {
-			MenuDTO dto = new MenuDTO();
-			dto.id = this.id;
-			dto.name = this.name;
-			dto.price = this.price;
-			dto.type = this.type;
-			dto.courses = this.courses;
-			return dto;
+			MenuDTO menuDto = new MenuDTO();
+			menuDto.id = this.id;
+			menuDto.name = this.name;
+			menuDto.price = this.price;
+			menuDto.type = this.type;
+			menuDto.courses = this.courses;
+			return menuDto;
 		}
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+	
 }

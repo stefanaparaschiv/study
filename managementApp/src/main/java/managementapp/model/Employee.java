@@ -15,35 +15,41 @@ import javax.persistence.Table;
 public class Employee {
 
 	public static final String TABLE_NAME = "EMPLOYEE";
-	
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(name = "FIRST_NAME")
-    private String firstName;
-	
+	private String firstName;
+
 	@Column(name = "LAST_NAME")
-    private String lastName;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "JOB")
-    private Job job;
+	private String lastName;
 
-    protected Employee() {}
+	@Enumerated(EnumType.STRING)
+	@Column(name = "JOB")
+	private Job job;
 
-    public Employee(String firstName, String lastName, Job job) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.job=job;
-    }
+	public Employee() {
+	}
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Employee[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
-    }
+	public Employee(String firstName, String lastName, Job job) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.job = job;
+	}
+
+	public Employee(Long id, String firstName, String lastName, Job job) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.job = job;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Employee[id=%d, firstName='%s', lastName='%s', job='%s']", id, firstName, lastName, job);
+	}
 
 	public Long getId() {
 		return id;
@@ -64,6 +70,5 @@ public class Employee {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	
-}
 
+}

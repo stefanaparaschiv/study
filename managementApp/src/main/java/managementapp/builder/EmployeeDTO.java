@@ -46,13 +46,45 @@ public class EmployeeDTO {
 		}
 
 		public EmployeeDTO build() {
-			EmployeeDTO dto = new EmployeeDTO(); 
-	        dto.id=this.id;
-	        dto.firstName=this.firstName;
-	        dto.lastName=this.lastName;
-	        dto.job=this.job;
-			return dto;
+			EmployeeDTO menuDto = new EmployeeDTO(); 
+	        menuDto.id=this.id;
+	        menuDto.firstName=this.firstName;
+	        menuDto.lastName=this.lastName;
+	        menuDto.job=this.job;
+			return menuDto;
 		}
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 }

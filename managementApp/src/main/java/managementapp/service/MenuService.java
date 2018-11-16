@@ -3,22 +3,24 @@ package managementapp.service;
 import java.util.List;
 import java.util.Optional;
 
+import managementapp.builder.MenuDTO;
+import managementapp.exceptions.NotFoundException;
 import managementapp.model.Menu;
 
 public interface MenuService {
 	
-	public List<Menu> findByMenuName(String name);
+	public List<MenuDTO> findByMenuName(String name);
 	
-	public List<Menu> findByPriceBelowLimit(int i);
+	public List<MenuDTO> findByPriceBelowLimit(int i);
 	
-	public Iterable<Menu> getAll();
+	public List<MenuDTO> getAll();
 	
-	public List<Menu> findByType(String type);
+	public List<MenuDTO> findByType(String type);
 
-	public Menu save(Menu menu);
+	public Menu save(MenuDTO menuDto);
 	
-	public Optional<Menu> findById(Long id);
+	public MenuDTO findById(Long id) throws NotFoundException;
 
-	public List<Menu> findDietMenusBelow(int kaloriesLimit);
+	public List<MenuDTO> findDietMenusBelow(int kaloriesLimit);
 
 }

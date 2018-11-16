@@ -2,7 +2,6 @@ package managementapp.controller;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import managementapp.builder.EmployeeDTO;
 import managementapp.exceptions.BadRequestException;
 import managementapp.exceptions.NotFoundException;
 import managementapp.model.Employee;
 import managementapp.model.Job;
-import managementapp.model.Type;
 import managementapp.service.EmployeeService;
 
 @RestController
@@ -37,14 +37,14 @@ public class EmployeeController {
 	}
 
 	@GetMapping
-	public Iterable<Employee> getAll() {
+	public List<EmployeeDTO> getAll() {
 		return employeeService.getAll();
 	}
 
 	@GetMapping("/search")
-	public List<Employee> getByName(@RequestParam(name = "lastName", required = false) String lastName,
+	public List<EmployeeDTO> getByName(@RequestParam(name = "lastName", required = false) String lastName,
 			@RequestParam(name = "firstName", required = false) String firstName) throws NotFoundException {
-		List<Employee> empList = null;
+		List<EmployeeDTO> empList = null;
 		if (firstName == null && lastName != null) {
 			empList = employeeService.findByLastName(lastName);
 		} else if (lastName == null && firstName != null) {
@@ -59,20 +59,16 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Employee> getById(@PathVariable(value = "id") Long id) throws NotFoundException {
-		Optional<Employee> emp = employeeService.findById(id);
-		if (!emp.isPresent()) {
-			throw new NotFoundException("No employee with id=" + id + " was found");
-		}
-		return emp;
+	public EmployeeDTO getById(@PathVariable(value = "id") Long id) throws NotFoundException {
+		return employeeService.findById(id);
 	}
 
 	@GetMapping("/search/{job}")
-	public Collection<Employee> getByJob(@PathVariable(value = "job") String job) throws NotFoundException, BadRequestException {
+	public Collection<EmployeeDTO> getByJob(@PathVariable(value = "job") String job) throws NotFoundException, BadRequestException {
 		if (!Job.containsString(job)) {
 			throw new BadRequestException("Incorrect value provided for job. Job does not exist.");
 		}
-		Collection<Employee> empList = employeeService.findByJob(job);
+		Collection<EmployeeDTO> empList = employeeService.findByJob(job);
 		if (empList == null || empList.size() == 0) {
 			throw new NotFoundException("No employees with job" + job + " were found");
 		}
@@ -81,7 +77,7 @@ public class EmployeeController {
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Employee createEmployee(@RequestBody Employee emp) {
-		return employeeService.save(emp);
+	public Employee createEmployee(@RequestBody EmployeeDTO empDTO) {
+		return employeeService.save(empDTO);
 	}
 }

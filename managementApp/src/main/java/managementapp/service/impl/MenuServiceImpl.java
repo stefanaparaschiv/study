@@ -1,13 +1,15 @@
 package managementapp.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import managementapp.builder.EmployeeDTO;
+import managementapp.builder.MenuDTO;
+import managementapp.exceptions.NotFoundException;
 import managementapp.model.Course;
 import managementapp.model.Employee;
 import managementapp.model.Menu;
@@ -25,41 +27,45 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public List<Menu> findByMenuName(String name) {
-		return menuRepository.findByName(name);
+	public List<MenuDTO> findByMenuName(String name) {
+		return convertMenuListToMenuDTOList(menuRepository.findByName(name));
 	}
 
 	@Override
-	public List<Menu> findByPriceBelowLimit(int priceLimit) {
-		return menuRepository.findByPriceBelow(priceLimit);
+	public List<MenuDTO> findByPriceBelowLimit(int priceLimit) {
+		return convertMenuListToMenuDTOList(menuRepository.findByPriceBelow(priceLimit));
 	}
 
 	@Override
-	public Iterable<Menu> getAll() {
-		return menuRepository.findAll();
+	public List<MenuDTO> getAll() {
+		return convertMenuListToMenuDTOList(menuRepository.findAll());
 	}
 
 	@Override
-	public List<Menu> findByType(String type) {
-		return menuRepository.findByType(type);
+	public List<MenuDTO> findByType(String type) {
+		return convertMenuListToMenuDTOList(menuRepository.findByType(type));
 	}
 
 	@Override
-	public Menu save(Menu menu) {
-		return menuRepository.save(menu);
+	public Menu save(MenuDTO menuDTO) {
+		return menuRepository.save(convertMenuDTOToMenu(menuDTO));
 	}
 
 	@Override
-	public Optional<Menu> findById(Long id) {
-		return menuRepository.findById(id);
+	public MenuDTO findById(Long id) throws NotFoundException {
+		Optional<Menu> searchedMenu = menuRepository.findById(id);
+		if (!searchedMenu.isPresent()) {
+			throw new NotFoundException("No menu with id=" + id + " was found");
+		}
+		return convertToMenuDTO(searchedMenu.get());
 	}
 
 	@Override
-	public List<Menu> findDietMenusBelow(int kaloriesLimit) {
-		Iterable<Menu> menus = this.getAll();
+	public List<MenuDTO> findDietMenusBelow(int kaloriesLimit) {
+		List<MenuDTO> menus = this.getAll();
 		int kalories = 0;
-		List<Menu> dietMenus = new ArrayList<Menu>();
-		for (Menu menu : menus) {
+		List<MenuDTO> dietMenus = new ArrayList<MenuDTO>();
+		for (MenuDTO menu : menus) {
 			for (Course course : menu.getCourses()) {
 				kalories += course.getKalories();
 			}
@@ -69,6 +75,26 @@ public class MenuServiceImpl implements MenuService {
 			kalories = 0;
 		}
 		return dietMenus;
+	}
+	
+	private MenuDTO convertToMenuDTO(Menu menu) {
+		MenuDTO menuDTO = new MenuDTO.Builder(menu.getId())
+		        .withCourses(menu.getCourses()).withName(menu.getName()).withPrice(menu.getPrice()).withType(menu.getType())
+		        .build();
+		return menuDTO;
+	}
+	
+	private List<MenuDTO> convertMenuListToMenuDTOList(Iterable<Menu> menus) {
+		List<MenuDTO> menuDTOs=new ArrayList<MenuDTO>();
+		for(Menu menu:menus)
+		{
+			menuDTOs.add(convertToMenuDTO(menu));
+		}
+		return menuDTOs;
+	}
+	
+	private Menu convertMenuDTOToMenu(MenuDTO menuDTO) {
+		return new Menu(menuDTO.getId(),menuDTO.getName(),menuDTO.getPrice(),menuDTO.getType(),menuDTO.getCourses());
 	}
 
 }

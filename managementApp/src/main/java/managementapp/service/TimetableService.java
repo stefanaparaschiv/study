@@ -2,14 +2,15 @@ package managementapp.service;
 
 import java.util.List;
 
+import managementapp.builder.TimetableDTO;
 import managementapp.model.Timetable;
 
 public interface TimetableService {
 
-	public List<Timetable> findByTimetableName(String name);
+	public List<TimetableDTO> findByTimetableName(String name);
 
-	public Iterable<Timetable> getAllTimetables();
+	public List<TimetableDTO> getAllTimetables();
 	
-	public List<Timetable> findTimetableWithClosingHourAfter(int hour);
+	public List<TimetableDTO> findTimetableWithClosingHourAfter(int hour);
 	
 }

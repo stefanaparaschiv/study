@@ -33,6 +33,15 @@ public class Menu {
 		this.type = type;
 		this.courses = courses;
 	}
+	
+	public Menu(Long id,String name, Integer price, Type type, List<Course> courses) {
+		super();
+		this.id=id;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.courses = courses;
+	}
 
 	public Menu() {
 		super();
