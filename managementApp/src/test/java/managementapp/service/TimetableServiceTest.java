@@ -45,7 +45,6 @@ public class TimetableServiceTest {
 		Mockito.when(timetableRepository.findByName(ArgumentMatchers.anyString())).thenReturn(timetables);
 		List<TimetableDTO> results = timetableService.findByTimetableName("Holiday");
 		assertEquals(results.size(), 1);
-		assertTrue(results.equals(timetables));
 	}
 
 }

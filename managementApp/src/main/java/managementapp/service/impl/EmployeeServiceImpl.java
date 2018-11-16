@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import managementapp.builder.EmployeeDTO;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.repository.EmployeeRepository;
 import managementapp.service.EmployeeService;
@@ -39,16 +39,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<EmployeeDTO> findByJob(String job) {
+	public List<EmployeeDTO> findByJob(String job) throws BusinessException {
 		List<Employee> employees = new ArrayList<Employee>(employeeRepository.findByJob(job));
+		if (employees == null || employees.size() == 0) {
+			throw new BusinessException("No employees with job" + job + " were found");
+		}
 		return convertEmployeeListToEmployeeDTOList(employees);
 	}
 
 	@Override
-	public EmployeeDTO findById(Long id) throws NotFoundException {
+	public EmployeeDTO findById(Long id) throws BusinessException {
 		Optional<Employee> emp = employeeRepository.findById(id);
 		if (!emp.isPresent()) {
-			throw new NotFoundException("No employee with id=" + id + " was found");
+			throw new BusinessException("No employee with id=" + id + " was found");
 		}
 		return convertToEmployeeDTO(emp.get());
 	}
@@ -79,6 +82,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	private Employee convertEmployeeDTOToEmployee(EmployeeDTO empDTO) {
 		return new Employee(empDTO.getId(), empDTO.getFirstName(), empDTO.getLastName(), empDTO.getJob());
+	}
+
+	@Override
+	public List<EmployeeDTO> findByName(String firstName, String lastName) throws BusinessException {
+		List<EmployeeDTO> empList = null;
+		if (firstName == null && lastName != null) {
+			empList = this.findByLastName(lastName);
+		} else if (lastName == null && firstName != null) {
+			empList = this.findByFirstName(firstName);
+		} else if (firstName != null && lastName != null) {
+			empList = this.findByFullName(firstName, lastName);
+		}
+		if (empList == null || empList.size() == 0) {
+			throw new BusinessException("No employees were found");
+		}
+		return empList;
 	}
 
 }

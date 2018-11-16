@@ -1,17 +1,17 @@
 package managementapp.exceptions;
 
-public class NotFoundException extends Exception {
+public class BusinessException extends Exception {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public NotFoundException(String message) {
+	public BusinessException(String message) {
 		super(message);
 	}
 
-	public NotFoundException(String message, Throwable throwable) {
+	public BusinessException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
 

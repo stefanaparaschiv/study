@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import managementapp.exceptions.BadRequestException;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.ValidationException;
+import managementapp.exceptions.BusinessException;
 
 @RestControllerAdvice
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
 	static final Logger LOGGER = LoggerFactory.getLogger(ControllerAdvice.class);
 	
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler(BusinessException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public ErrorDto handleNotFoundException(NotFoundException ex) {
+	public ErrorDto handleNotFoundException(BusinessException ex) {
 		LOGGER.error("Exception thrown: ", ex);
 		return this.generateErrorDto(HttpStatus.NOT_FOUND, ex);
 	}
 
-	@ExceptionHandler(BadRequestException.class)
+	@ExceptionHandler(ValidationException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public ErrorDto handleBadRequestException(BadRequestException ex) {
+	public ErrorDto handleBadRequestException(ValidationException ex) {
 		return this.generateErrorDto(HttpStatus.BAD_REQUEST, ex);
 	}
 

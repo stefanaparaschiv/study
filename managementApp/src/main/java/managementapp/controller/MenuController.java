@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import managementapp.builder.MenuDTO;
-import managementapp.exceptions.BadRequestException;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.BusinessException;
+import managementapp.exceptions.ValidationException;
 import managementapp.model.Menu;
-import managementapp.model.Type;
 import managementapp.service.MenuService;
+import managemntApp.util.Validator;
 
 @RestController
 @RequestMapping("/menus")
@@ -50,10 +50,8 @@ public class MenuController {
 	}
 
 	@GetMapping("/type/{type}")
-	public List<MenuDTO> findByType(@PathVariable(value = "type") String type) throws BadRequestException {
-		if (!Type.containsString(type)) {
-			throw new BadRequestException("Incorrect value provided for menu type");
-		}
+	public List<MenuDTO> findByType(@PathVariable(value = "type") String type) throws ValidationException {
+		Validator.validateType(type);
 		return menuService.findByType(type);
 	}
 
@@ -65,15 +63,12 @@ public class MenuController {
 
 	@PutMapping("/update/{id}")
 	public @ResponseBody Menu updateMenu(@RequestBody MenuDTO menu, @PathVariable("id") Long id)
-			throws BadRequestException, NotFoundException {
-		if (menu.getId() != id) {
-			throw new BadRequestException("Path id and menu id do not match");
-		}
+			throws ValidationException, BusinessException {
+		Validator.validateMenuId(menu, id);
 		MenuDTO searchedMenu = menuService.findById(id);
-	    searchedMenu.setCourses(menu.getCourses());
-		searchedMenu.setName(menu.getName());
-		searchedMenu.setPrice(menu.getPrice());
-		searchedMenu.setType(menu.getType());
+		searchedMenu = new MenuDTO.Builder(menu.getId())
+		        .withCourses(menu.getCourses()).withName(menu.getName()).withPrice(menu.getPrice()).withType(menu.getType())
+		        .build();
 		return menuService.save(searchedMenu);
 	}
 

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import managementapp.builder.EmployeeDTO;
-import managementapp.exceptions.BadRequestException;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.BusinessException;
+import managementapp.exceptions.ValidationException;
 import managementapp.model.Employee;
-import managementapp.model.Job;
 import managementapp.service.EmployeeService;
+import managemntApp.util.Validator;
 
 @RestController
 @RequestMapping("/employees")
@@ -43,36 +43,19 @@ public class EmployeeController {
 
 	@GetMapping("/search")
 	public List<EmployeeDTO> getByName(@RequestParam(name = "lastName", required = false) String lastName,
-			@RequestParam(name = "firstName", required = false) String firstName) throws NotFoundException {
-		List<EmployeeDTO> empList = null;
-		if (firstName == null && lastName != null) {
-			empList = employeeService.findByLastName(lastName);
-		} else if (lastName == null && firstName != null) {
-			empList = employeeService.findByFirstName(firstName);
-		} else if (firstName != null && lastName != null) {
-			empList = employeeService.findByFullName(firstName, lastName);
-		}
-		if (empList == null || empList.size() == 0) {
-			throw new NotFoundException("No employees were found");
-		}
-		return empList;
+			@RequestParam(name = "firstName", required = false) String firstName) throws BusinessException {
+		return employeeService.findByName(firstName,lastName);
 	}
 
 	@GetMapping("/{id}")
-	public EmployeeDTO getById(@PathVariable(value = "id") Long id) throws NotFoundException {
+	public EmployeeDTO getById(@PathVariable(value = "id") Long id) throws BusinessException {
 		return employeeService.findById(id);
 	}
 
 	@GetMapping("/search/{job}")
-	public Collection<EmployeeDTO> getByJob(@PathVariable(value = "job") String job) throws NotFoundException, BadRequestException {
-		if (!Job.containsString(job)) {
-			throw new BadRequestException("Incorrect value provided for job. Job does not exist.");
-		}
-		Collection<EmployeeDTO> empList = employeeService.findByJob(job);
-		if (empList == null || empList.size() == 0) {
-			throw new NotFoundException("No employees with job" + job + " were found");
-		}
-		return empList;
+	public Collection<EmployeeDTO> getByJob(@PathVariable(value = "job") String job) throws BusinessException, ValidationException {
+		Validator.validateJob(job);
+		return employeeService.findByJob(job);
 	}
 
 	@PostMapping

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import managementapp.builder.MenuDTO;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.BusinessException;
 import managementapp.model.Menu;
 
 public interface MenuService {
@@ -19,7 +19,7 @@ public interface MenuService {
 
 	public Menu save(MenuDTO menuDto);
 	
-	public MenuDTO findById(Long id) throws NotFoundException;
+	public MenuDTO findById(Long id) throws BusinessException;
 
 	public List<MenuDTO> findDietMenusBelow(int kaloriesLimit);
 

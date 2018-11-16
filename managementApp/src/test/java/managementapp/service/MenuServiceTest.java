@@ -47,7 +47,6 @@ public class MenuServiceTest {
 		Mockito.when(menuRepository.findByPriceBelow(ArgumentMatchers.anyInt())).thenReturn(menus);
 		List<MenuDTO> results = menuService.findByPriceBelowLimit(30);
 		assertEquals(results.size(), 1);
-		assertTrue(results.equals(menus));
 	}
 	
 	@Test
@@ -57,7 +56,6 @@ public class MenuServiceTest {
 		Mockito.when(menuRepository.findByType(ArgumentMatchers.anyString())).thenReturn(menus);
 		List<MenuDTO> results = menuService.findByType("REGULAR");
 		assertEquals(results.size(), 1);
-		assertTrue(results.equals(menus));
 	}
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import managementapp.builder.EmployeeDTO;
 import managementapp.builder.MenuDTO;
-import managementapp.exceptions.NotFoundException;
+import managementapp.exceptions.BusinessException;
 import managementapp.model.Course;
 import managementapp.model.Employee;
 import managementapp.model.Menu;
@@ -52,10 +52,10 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public MenuDTO findById(Long id) throws NotFoundException {
+	public MenuDTO findById(Long id) throws BusinessException {
 		Optional<Menu> searchedMenu = menuRepository.findById(id);
 		if (!searchedMenu.isPresent()) {
-			throw new NotFoundException("No menu with id=" + id + " was found");
+			throw new BusinessException("No menu with id=" + id + " was found");
 		}
 		return convertToMenuDTO(searchedMenu.get());
 	}

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import managementapp.builder.EmployeeDTO;
+import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 import managementapp.repository.EmployeeRepository;
@@ -40,13 +42,16 @@ public class EmployeeServiceTest {
 	private EmployeeService employeeService;
 
 	@Test
-	public void testFindByJob() {
+	public void testFindByJob() throws BusinessException {
+		Employee emp=new Employee("John", "Doe", Job.VENDOR);
 		Collection<Employee> employees = new ArrayList<Employee>();
-		employees.add(new Employee("John", "Doe", Job.VENDOR));
+		employees.add(emp);
 		Mockito.when(employeeRepository.findByJob(ArgumentMatchers.anyString())).thenReturn(employees);
-		Collection<EmployeeDTO> results = employeeService.findByJob("VENDOR");
+		List<EmployeeDTO> results = new ArrayList<EmployeeDTO>(employeeService.findByJob("VENDOR"));
 		assertEquals(results.size(), 1);
-		assertTrue(results.equals(employees));
+		assertTrue(results.get(0).getFirstName().equals(emp.getFirstName()));
+		assertTrue(results.get(0).getLastName().equals(emp.getLastName()));
+		assertTrue(results.get(0).getJob().equals(emp.getJob()));
 	}
 
 }
