@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import managementapp.builder.MenuDTO;
 import managementapp.model.Menu;
 import managementapp.model.Type;
 import managementapp.repository.MenuRepository;
@@ -54,7 +55,7 @@ public class MenuServiceTest {
 		List<Menu> menus = new ArrayList<Menu>();
 		menus.add(new Menu("Monday", 10, Type.VEGETARIAN));
 		Mockito.when(menuRepository.findByType(ArgumentMatchers.anyString())).thenReturn(menus);
-		List<Menu> results = menuService.findByType("REGULAR");
+		List<MenuDTO> results = menuService.findByType("REGULAR");
 		assertEquals(results.size(), 1);
 		assertTrue(results.equals(menus));
 	}

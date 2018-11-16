@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import managementapp.builder.EmployeeDTO;
 import managementapp.model.Employee;
 import managementapp.model.Job;
 import managementapp.repository.EmployeeRepository;
@@ -43,7 +44,7 @@ public class EmployeeServiceTest {
 		Collection<Employee> employees = new ArrayList<Employee>();
 		employees.add(new Employee("John", "Doe", Job.VENDOR));
 		Mockito.when(employeeRepository.findByJob(ArgumentMatchers.anyString())).thenReturn(employees);
-		Collection<Employee> results = employeeService.findByJob("VENDOR");
+		Collection<EmployeeDTO> results = employeeService.findByJob("VENDOR");
 		assertEquals(results.size(), 1);
 		assertTrue(results.equals(employees));
 	}
