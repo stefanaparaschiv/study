@@ -1,7 +1,6 @@
 package managementapp.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
@@ -18,20 +17,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import managementapp.builder.TimetableDTO;
 import managementapp.model.Timetable;
-import managementapp.repository.TimetableRepository;
+import managementapp.repository.dao.TimetableDAO;
 import managementapp.service.impl.TimetableServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class TimetableServiceTest {
 
-	private static TimetableRepository timetableRepository = mock(TimetableRepository.class);
+	private static TimetableDAO timetableDAO = mock(TimetableDAO.class);
 
 	@TestConfiguration
 	static class ContextConfiguration {
 
 		@Bean
 		public TimetableServiceImpl timetableService() {
-			return new TimetableServiceImpl(timetableRepository);
+			return new TimetableServiceImpl(timetableDAO);
 		}
 	}
 
@@ -42,7 +41,7 @@ public class TimetableServiceTest {
 	public void testFindByName() {
 		List<Timetable> timetables = new ArrayList<Timetable>();
 		timetables.add(new Timetable("09.00", "18.00", "Holiday"));
-		Mockito.when(timetableRepository.findByName(ArgumentMatchers.anyString())).thenReturn(timetables);
+		Mockito.when(timetableDAO.findByName(ArgumentMatchers.anyString())).thenReturn(timetables);
 		List<TimetableDTO> results = timetableService.findByTimetableName("Holiday");
 		assertEquals(results.size(), 1);
 	}

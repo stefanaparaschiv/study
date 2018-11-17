@@ -6,36 +6,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.MenuDTO;
 import managementapp.builder.TimetableDTO;
-import managementapp.model.Menu;
 import managementapp.model.Timetable;
-import managementapp.repository.TimetableRepository;
+import managementapp.repository.dao.TimetableDAO;
 import managementapp.service.TimetableService;
 
 @Service
 public class TimetableServiceImpl implements TimetableService {
-
-	private TimetableRepository timetableRepository;
+	
+	private TimetableDAO timetableDAO;
 
 	@Autowired
-	public TimetableServiceImpl(TimetableRepository timetableRepository) {
-		this.timetableRepository = timetableRepository;
+	public TimetableServiceImpl(TimetableDAO timetableDAO) {
+		this.timetableDAO=timetableDAO;
 	}
 
 	@Override
 	public List<TimetableDTO> findByTimetableName(String name) {
-		return convertTimetableListToTimetableDTOList(timetableRepository.findByName(name));
+		return convertTimetableListToTimetableDTOList(timetableDAO.findByName(name));
 	}
 
 	@Override
 	public List<TimetableDTO> getAllTimetables() {
-		return convertTimetableListToTimetableDTOList(timetableRepository.findAll());
+		return convertTimetableListToTimetableDTOList(timetableDAO.findAll());
 	}
 
 	@Override
 	public List<TimetableDTO> findTimetableWithClosingHourAfter(int hour) {
-		return convertTimetableListToTimetableDTOList(timetableRepository.findTimetableWithClosingHourAfter(hour));
+		return convertTimetableListToTimetableDTOList(timetableDAO.findTimetableWithClosingHourAfter(hour));
 	}
 
 	private TimetableDTO convertToTimetableDTO(Timetable timetable) {
