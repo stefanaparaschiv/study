@@ -38,22 +38,26 @@ public class EmployeeController {
 
 	@GetMapping
 	public List<EmployeeDTO> getAll() {
+		LOGGER.info("Getting all employees");
 		return employeeService.getAll();
 	}
 
 	@GetMapping("/search")
 	public List<EmployeeDTO> getByName(@RequestParam(name = "lastName", required = false) String lastName,
 			@RequestParam(name = "firstName", required = false) String firstName) throws BusinessException {
+		LOGGER.info("Search employee with last name {} and first name {}", lastName, firstName);
 		return employeeService.findByName(firstName,lastName);
 	}
 
 	@GetMapping("/{id}")
 	public EmployeeDTO getById(@PathVariable(value = "id") Long id) throws BusinessException {
+		LOGGER.info("Search employee with id {}", id);
 		return employeeService.findById(id);
 	}
 
 	@GetMapping("/search/{job}")
 	public Collection<EmployeeDTO> getByJob(@PathVariable(value = "job") String job) throws BusinessException, ValidationException {
+		LOGGER.info("Search employees with job {}", job);
 		Validator.validateJob(job);
 		return employeeService.findByJob(job);
 	}
@@ -61,6 +65,7 @@ public class EmployeeController {
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Employee createEmployee(@RequestBody EmployeeDTO empDTO) {
+		LOGGER.info("Create employee");
 		return employeeService.save(empDTO);
 	}
 }
