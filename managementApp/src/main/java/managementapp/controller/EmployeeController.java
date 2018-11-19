@@ -64,7 +64,7 @@ public class EmployeeController {
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Employee createEmployee(@RequestBody EmployeeDTO empDTO) {
+	public EmployeeDTO createEmployee(@RequestBody EmployeeDTO empDTO) {
 		LOGGER.info("Create employee");
 		return employeeService.save(empDTO);
 	}

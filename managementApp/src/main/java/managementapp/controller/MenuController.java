@@ -64,13 +64,13 @@ public class MenuController {
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Menu createMenu(@RequestBody MenuDTO menu) {
+	public MenuDTO createMenu(@RequestBody MenuDTO menu) {
 		LOGGER.info("Create menu");
 		return menuService.save(menu);
 	}
 
 	@PutMapping("/update/{id}")
-	public @ResponseBody Menu updateMenu(@RequestBody MenuDTO menu, @PathVariable("id") Long id)
+	public @ResponseBody MenuDTO updateMenu(@RequestBody MenuDTO menu, @PathVariable("id") Long id)
 			throws ValidationException, BusinessException {
 		LOGGER.info("Update menu with id {}", id);
 		Validator.validateMenuId(menu, id);

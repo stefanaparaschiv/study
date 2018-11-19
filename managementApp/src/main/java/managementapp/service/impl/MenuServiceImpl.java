@@ -46,8 +46,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public Menu save(MenuDTO menuDTO) {
-		return menuRepository.save(MenuConvertor.convertMenuDTOToMenu(menuDTO));
+	public MenuDTO save(MenuDTO menuDTO) {
+		return MenuConvertor.convertToMenuDTO(menuRepository.save(MenuConvertor.convertMenuDTOToMenu(menuDTO)));
 	}
 
 	@Override

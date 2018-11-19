@@ -24,7 +24,7 @@ public interface EmployeeService {
 
 	public Collection<EmployeeDTO> findByJob(String job) throws BusinessException;
 
-	public Employee save(EmployeeDTO empDTO);
+	public EmployeeDTO save(EmployeeDTO empDTO);
 
 	public List<EmployeeDTO> findByFirstName(String firstName);
 

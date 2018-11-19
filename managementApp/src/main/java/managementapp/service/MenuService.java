@@ -17,7 +17,7 @@ public interface MenuService {
 	
 	public List<MenuDTO> findByType(String type);
 
-	public Menu save(MenuDTO menuDto);
+	public MenuDTO save(MenuDTO menuDto);
 	
 	public MenuDTO findById(Long id) throws BusinessException;
 
