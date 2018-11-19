@@ -6,12 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import managementapp.model.Timetable;
 import managementapp.repository.dao.TimetableDAO;
 
-@Service
+@Component
 public class TimetableDAOImpl implements TimetableDAO {
 
 	private EntityManager em;
