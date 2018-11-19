@@ -7,14 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.EmployeeDTO;
 import managementapp.builder.MenuDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Course;
-import managementapp.model.Employee;
 import managementapp.model.Menu;
 import managementapp.repository.MenuRepository;
 import managementapp.service.MenuService;
+import managementapp.util.MenuConvertor;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -28,27 +27,27 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public List<MenuDTO> findByMenuName(String name) {
-		return convertMenuListToMenuDTOList(menuRepository.findByName(name));
+		return MenuConvertor.convertMenuListToMenuDTOList(menuRepository.findByName(name));
 	}
 
 	@Override
 	public List<MenuDTO> findByPriceBelowLimit(int priceLimit) {
-		return convertMenuListToMenuDTOList(menuRepository.findByPriceBelow(priceLimit));
+		return MenuConvertor.convertMenuListToMenuDTOList(menuRepository.findByPriceBelow(priceLimit));
 	}
 
 	@Override
 	public List<MenuDTO> getAll() {
-		return convertMenuListToMenuDTOList(menuRepository.findAll());
+		return MenuConvertor.convertMenuListToMenuDTOList(menuRepository.findAll());
 	}
 
 	@Override
 	public List<MenuDTO> findByType(String type) {
-		return convertMenuListToMenuDTOList(menuRepository.findByType(type));
+		return MenuConvertor.convertMenuListToMenuDTOList(menuRepository.findByType(type));
 	}
 
 	@Override
 	public Menu save(MenuDTO menuDTO) {
-		return menuRepository.save(convertMenuDTOToMenu(menuDTO));
+		return menuRepository.save(MenuConvertor.convertMenuDTOToMenu(menuDTO));
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class MenuServiceImpl implements MenuService {
 		if (!searchedMenu.isPresent()) {
 			throw new BusinessException("No menu with id=" + id + " was found");
 		}
-		return convertToMenuDTO(searchedMenu.get());
+		return MenuConvertor.convertToMenuDTO(searchedMenu.get());
 	}
 
 	@Override
@@ -75,26 +74,6 @@ public class MenuServiceImpl implements MenuService {
 			kalories = 0;
 		}
 		return dietMenus;
-	}
-	
-	private MenuDTO convertToMenuDTO(Menu menu) {
-		MenuDTO menuDTO = new MenuDTO.Builder(menu.getId())
-		        .withCourses(menu.getCourses()).withName(menu.getName()).withPrice(menu.getPrice()).withType(menu.getType())
-		        .build();
-		return menuDTO;
-	}
-	
-	private List<MenuDTO> convertMenuListToMenuDTOList(Iterable<Menu> menus) {
-		List<MenuDTO> menuDTOs=new ArrayList<MenuDTO>();
-		for(Menu menu:menus)
-		{
-			menuDTOs.add(convertToMenuDTO(menu));
-		}
-		return menuDTOs;
-	}
-	
-	private Menu convertMenuDTOToMenu(MenuDTO menuDTO) {
-		return new Menu(menuDTO.getId(),menuDTO.getName(),menuDTO.getPrice(),menuDTO.getType(),menuDTO.getCourses());
 	}
 
 }

@@ -12,6 +12,7 @@ import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.repository.EmployeeRepository;
 import managementapp.service.EmployeeService;
+import managementapp.util.EmployeeConvertor;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -25,17 +26,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<EmployeeDTO> findByLastName(String lastName) {
-		return convertEmployeeListToEmployeeDTOList(employeeRepository.findByLastName(lastName));
+		return EmployeeConvertor.convertEmployeeListToEmployeeDTOList(employeeRepository.findByLastName(lastName));
 	}
 
 	@Override
 	public List<EmployeeDTO> getAll() {
-		return convertEmployeeListToEmployeeDTOList(employeeRepository.findAll());
+		return EmployeeConvertor.convertEmployeeListToEmployeeDTOList(employeeRepository.findAll());
 	}
 
 	@Override
 	public List<EmployeeDTO> findByFullName(String firstName, String lastName) {
-		return convertEmployeeListToEmployeeDTOList(employeeRepository.findByFirstNameAndLastName(firstName, lastName));
+		return EmployeeConvertor.convertEmployeeListToEmployeeDTOList(employeeRepository.findByFirstNameAndLastName(firstName, lastName));
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employees == null || employees.size() == 0) {
 			throw new BusinessException("No employees with job" + job + " were found");
 		}
-		return convertEmployeeListToEmployeeDTOList(employees);
+		return EmployeeConvertor.convertEmployeeListToEmployeeDTOList(employees);
 	}
 
 	@Override
@@ -53,35 +54,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (!emp.isPresent()) {
 			throw new BusinessException("No employee with id=" + id + " was found");
 		}
-		return convertToEmployeeDTO(emp.get());
+		return EmployeeConvertor.convertToEmployeeDTO(emp.get());
 	}
 
 	@Override
 	public Employee save(EmployeeDTO empDTO) {
-		return employeeRepository.save(convertEmployeeDTOToEmployee(empDTO));
+		return employeeRepository.save(EmployeeConvertor.convertEmployeeDTOToEmployee(empDTO));
 	}
 
 	@Override
 	public List<EmployeeDTO> findByFirstName(String firstName) {
-		return convertEmployeeListToEmployeeDTOList(employeeRepository.findByFirstName(firstName));
-	}
-
-	private EmployeeDTO convertToEmployeeDTO(Employee emp) {
-		EmployeeDTO empDTO = new EmployeeDTO.Builder(emp.getId()).withFirstName(emp.getFirstName())
-				.withLastName(emp.getLastName()).withJob(emp.getJob()).build();
-		return empDTO;
-	}
-
-	private List<EmployeeDTO> convertEmployeeListToEmployeeDTOList(Iterable<Employee> employees) {
-		List<EmployeeDTO> employeeDTOs = new ArrayList<EmployeeDTO>();
-		for (Employee emp : employees) {
-			employeeDTOs.add(convertToEmployeeDTO(emp));
-		}
-		return employeeDTOs;
-	}
-
-	private Employee convertEmployeeDTOToEmployee(EmployeeDTO empDTO) {
-		return new Employee(empDTO.getId(), empDTO.getFirstName(), empDTO.getLastName(), empDTO.getJob());
+		return EmployeeConvertor.convertEmployeeListToEmployeeDTOList(employeeRepository.findByFirstName(firstName));
 	}
 
 	@Override

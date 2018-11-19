@@ -10,6 +10,7 @@ import managementapp.builder.TimetableDTO;
 import managementapp.model.Timetable;
 import managementapp.repository.dao.TimetableDAO;
 import managementapp.service.TimetableService;
+import managementapp.util.TimetableConvertor;
 
 @Service
 public class TimetableServiceImpl implements TimetableService {
@@ -23,31 +24,17 @@ public class TimetableServiceImpl implements TimetableService {
 
 	@Override
 	public List<TimetableDTO> findByTimetableName(String name) {
-		return convertTimetableListToTimetableDTOList(timetableDAO.findByName(name));
+		return TimetableConvertor.convertTimetableListToTimetableDTOList(timetableDAO.findByName(name));
 	}
 
 	@Override
 	public List<TimetableDTO> getAllTimetables() {
-		return convertTimetableListToTimetableDTOList(timetableDAO.findAll());
+		return TimetableConvertor.convertTimetableListToTimetableDTOList(timetableDAO.findAll());
 	}
 
 	@Override
 	public List<TimetableDTO> findTimetableWithClosingHourAfter(int hour) {
-		return convertTimetableListToTimetableDTOList(timetableDAO.findTimetableWithClosingHourAfter(hour));
-	}
-
-	private TimetableDTO convertToTimetableDTO(Timetable timetable) {
-		TimetableDTO timetableDTO = new TimetableDTO.Builder(timetable.getId()).withClosingHours(timetable.getClosingHours()).withOpeningHours(timetable.getOpeningHours()).withName(timetable.getName())	       
-		        .build();
-		return timetableDTO;
-	}
-
-	private List<TimetableDTO> convertTimetableListToTimetableDTOList(Iterable<Timetable> timetables) {
-		List<TimetableDTO> timetableDTOs = new ArrayList<TimetableDTO>();
-		for (Timetable timetable : timetables) {
-			timetableDTOs.add(convertToTimetableDTO(timetable));
-		}
-		return timetableDTOs;
+		return TimetableConvertor.convertTimetableListToTimetableDTOList(timetableDAO.findTimetableWithClosingHourAfter(hour));
 	}
 
 }
