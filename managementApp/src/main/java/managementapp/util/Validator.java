@@ -1,4 +1,4 @@
-package managemntApp.util;
+package managementapp.util;
 
 import managementapp.builder.MenuDTO;
 import managementapp.exceptions.ValidationException;

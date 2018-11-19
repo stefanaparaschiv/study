@@ -22,7 +22,7 @@ import managementapp.exceptions.BusinessException;
 import managementapp.exceptions.ValidationException;
 import managementapp.model.Menu;
 import managementapp.service.MenuService;
-import managemntApp.util.Validator;
+import managementapp.util.Validator;
 
 @RestController
 @RequestMapping("/menus")
