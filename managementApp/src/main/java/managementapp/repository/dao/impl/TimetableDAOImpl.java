@@ -29,11 +29,10 @@ public class TimetableDAOImpl implements TimetableDAO {
 		Query query = em.createNativeQuery("SELECT * FROM Timetable t WHERE CAST(LEFT(t.CLOSING_HOURS, 2) AS INT) >=?");
 		query.setParameter(1, hour);
 		List<Object[]> results = query.getResultList();
-		for(Object[] object:results )
-		{
-		Timetable timetable= new Timetable(Long.parseLong(object[0].toString()),String.valueOf(object[2]),String.valueOf(object[3]),String.valueOf(object[1]));
-		timetables.add(timetable);
-		}
+		results.stream().forEach((record) -> {
+			Timetable timetable= new Timetable(Long.parseLong(record[0].toString()),String.valueOf(record[2]),String.valueOf(record[3]),String.valueOf(record[1]));
+			timetables.add(timetable);
+		});
 		return timetables;
 	}
 	
