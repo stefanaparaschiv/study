@@ -1,7 +1,10 @@
 package managementapp.builder;
 
+import org.springframework.stereotype.Component;
+
 import managementapp.model.Job;
 
+@Component
 public class EmployeeDTO {
 	
 	private Long id;

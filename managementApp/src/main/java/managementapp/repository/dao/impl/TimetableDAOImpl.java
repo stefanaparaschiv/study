@@ -1,5 +1,6 @@
 package managementapp.repository.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,11 +25,18 @@ public class TimetableDAOImpl implements TimetableDAO {
 
 	@Override
 	public List<Timetable> findTimetableWithClosingHourAfter(int hour) {
-		Query query = em.createNativeQuery("SELECT * FROM Timetable t WHERE CAST(LEFT(t.CLOSING_HOURS, 2) AS INT) >=?","TimetableMapping");
-		query.setParameter(1, hour);		
-		List<Timetable> results = query.getResultList();
-		return results;
+		List<Timetable> timetables=new ArrayList<Timetable>();
+		Query query = em.createNativeQuery("SELECT * FROM Timetable t WHERE CAST(LEFT(t.CLOSING_HOURS, 2) AS INT) >=?");
+		query.setParameter(1, hour);
+		List<Object[]> results = query.getResultList();
+		for(Object[] object:results )
+		{
+		Timetable timetable= new Timetable(Long.parseLong(object[0].toString()),String.valueOf(object[2]),String.valueOf(object[3]),String.valueOf(object[1]));
+		timetables.add(timetable);
+		}
+		return timetables;
 	}
+	
 
 	@Override
 	public Iterable<Timetable> findByName(String name) {

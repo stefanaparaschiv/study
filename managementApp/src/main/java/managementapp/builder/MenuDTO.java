@@ -2,9 +2,12 @@ package managementapp.builder;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import managementapp.model.Course;
 import managementapp.model.Type;
 
+@Component
 public class MenuDTO {
 
 	private Long id;

@@ -1,5 +1,8 @@
 package managementapp.builder;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TimetableDTO {
 
 	private Long id;
