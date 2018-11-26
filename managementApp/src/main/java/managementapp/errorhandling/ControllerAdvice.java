@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import managementapp.exceptions.ValidationException;
+import managementapp.dto.ErrorDto;
 import managementapp.exceptions.BusinessException;
 
 @RestControllerAdvice
