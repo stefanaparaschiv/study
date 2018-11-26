@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.EmployeeDTO;
+import managementapp.dto.EmployeeDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.model.Job;

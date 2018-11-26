@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import managementapp.builder.MenuDTO;
+import managementapp.builder.MenuConvertor;
+import managementapp.dto.MenuDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.exceptions.ValidationException;
 import managementapp.model.Menu;
@@ -75,8 +76,7 @@ public class MenuController {
 		LOGGER.info("Update menu with id {}", id);
 		Validator.validateMenuId(menu, id);
 		MenuDTO searchedMenu = menuService.findById(id);
-		searchedMenu = new MenuDTO.Builder(menu.getId()).withCourses(menu.getCourses()).withName(menu.getName())
-				.withPrice(menu.getPrice()).withType(menu.getType()).build();
+		searchedMenu = new MenuDTO(menu);
 		return menuService.save(searchedMenu);
 	}
 

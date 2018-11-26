@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.TimetableDTO;
+import managementapp.builder.TimetableConvertor;
+import managementapp.dto.TimetableDTO;
 import managementapp.repository.dao.TimetableDAO;
 import managementapp.service.TimetableService;
-import managementapp.util.TimetableConvertor;
 
 @Service
 public class TimetableServiceImpl implements TimetableService {

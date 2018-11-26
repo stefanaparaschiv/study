@@ -1,6 +1,6 @@
 package managementapp.util;
 
-import managementapp.builder.MenuDTO;
+import managementapp.dto.MenuDTO;
 import managementapp.exceptions.ValidationException;
 import managementapp.model.Job;
 import managementapp.model.Type;

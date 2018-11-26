@@ -7,13 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.MenuDTO;
+import managementapp.builder.MenuConvertor;
+import managementapp.dto.MenuDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Course;
 import managementapp.model.Menu;
 import managementapp.repository.MenuRepository;
 import managementapp.service.MenuService;
-import managementapp.util.MenuConvertor;
 
 @Service
 public class MenuServiceImpl implements MenuService {

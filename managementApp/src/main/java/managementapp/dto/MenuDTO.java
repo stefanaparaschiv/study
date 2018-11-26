@@ -1,4 +1,4 @@
-package managementapp.builder;
+package managementapp.dto;
 
 import java.util.List;
 
@@ -20,55 +20,17 @@ public class MenuDTO {
 
 	private List<Course> courses;
 
-	private MenuDTO() {
-
+	public MenuDTO() {
+		super();
 	}
-
-	public static class Builder {
-
-		private Long id;
-
-		private String name;
-
-		private Integer price;
-
-		private Type type;
-
-		private List<Course> courses;
-
-		public Builder(Long id) {
-			this.id = id;
-		}
-
-		public Builder withName(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public Builder withType(Type type) {
-			this.type = type;
-			return this;
-		}
-
-		public Builder withPrice(Integer price) {
-			this.price = price;
-			return this;
-		}
-
-		public Builder withCourses(List<Course> courses) {
-			this.courses = courses;
-			return this;
-		}
-
-		public MenuDTO build() {
-			MenuDTO menuDto = new MenuDTO();
-			menuDto.id = this.id;
-			menuDto.name = this.name;
-			menuDto.price = this.price;
-			menuDto.type = this.type;
-			menuDto.courses = this.courses;
-			return menuDto;
-		}
+	
+	public MenuDTO(MenuDTO menu) {
+		super();
+		id=menu.id;
+		name=menu.name;
+		price=menu.price;
+		type=menu.type;
+		courses=menu.courses;
 	}
 
 	public Long getId() {
@@ -111,4 +73,5 @@ public class MenuDTO {
 		this.courses = courses;
 	}
 	
+
 }

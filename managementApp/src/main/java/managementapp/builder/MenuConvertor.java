@@ -1,16 +1,20 @@
-package managementapp.util;
+package managementapp.builder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import managementapp.builder.MenuDTO;
+import managementapp.dto.MenuDTO;
 import managementapp.model.Menu;
 
 public class MenuConvertor {
 
 	public static MenuDTO convertToMenuDTO(Menu menu) {
-		MenuDTO menuDTO = new MenuDTO.Builder(menu.getId()).withCourses(menu.getCourses()).withName(menu.getName())
-				.withPrice(menu.getPrice()).withType(menu.getType()).build();
+		MenuDTO menuDTO = new MenuDTO();
+		menuDTO.setId(menu.getId());
+		menuDTO.setCourses(menu.getCourses());
+		menuDTO.setName(menu.getName());
+		menuDTO.setPrice(menu.getPrice());
+		menuDTO.setType(menu.getType());
 		return menuDTO;
 	}
 
@@ -23,8 +27,10 @@ public class MenuConvertor {
 	}
 
 	public static Menu convertMenuDTOToMenu(MenuDTO menuDTO) {
-		return new Menu(menuDTO.getId(), menuDTO.getName(), menuDTO.getPrice(), menuDTO.getType(),
+		Menu menu = new Menu(menuDTO.getName(), menuDTO.getPrice(), menuDTO.getType(),
 				menuDTO.getCourses());
+		menu.setId(menuDTO.getId());
+		return menu;
 	}
 
 }

@@ -39,13 +39,6 @@ public class Employee {
 		this.job = job;
 	}
 
-	public Employee(Long id, String firstName, String lastName, Job job) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.job = job;
-	}
-
 	@Override
 	public String toString() {
 		return String.format("Employee[id=%d, firstName='%s', lastName='%s', job='%s']", id, firstName, lastName, job);
@@ -70,5 +63,18 @@ public class Employee {
 	public void setJob(Job job) {
 		this.job = job;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 
 }

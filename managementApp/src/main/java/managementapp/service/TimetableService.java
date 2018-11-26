@@ -2,7 +2,7 @@ package managementapp.service;
 
 import java.util.List;
 
-import managementapp.builder.TimetableDTO;
+import managementapp.dto.TimetableDTO;
 import managementapp.model.Timetable;
 
 public interface TimetableService {

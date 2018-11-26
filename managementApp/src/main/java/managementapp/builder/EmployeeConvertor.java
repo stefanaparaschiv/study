@@ -1,16 +1,19 @@
-package managementapp.util;
+package managementapp.builder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import managementapp.builder.EmployeeDTO;
+import managementapp.dto.EmployeeDTO;
 import managementapp.model.Employee;
 
 public class EmployeeConvertor {
 
 	public static EmployeeDTO convertToEmployeeDTO(Employee emp) {
-		EmployeeDTO empDTO = new EmployeeDTO.Builder(emp.getId()).withFirstName(emp.getFirstName())
-				.withLastName(emp.getLastName()).withJob(emp.getJob()).build();
+		EmployeeDTO empDTO = new EmployeeDTO();
+		empDTO.setId(emp.getId());
+		empDTO.setFirstName(emp.getLastName());
+		empDTO.setJob(emp.getJob());
+		empDTO.setLastName(emp.getLastName());
 		return empDTO;
 	}
 
@@ -23,7 +26,9 @@ public class EmployeeConvertor {
 	}
 
 	public static Employee convertEmployeeDTOToEmployee(EmployeeDTO empDTO) {
-		return new Employee(empDTO.getId(), empDTO.getFirstName(), empDTO.getLastName(), empDTO.getJob());
+		Employee emp = new Employee(empDTO.getFirstName(), empDTO.getLastName(), empDTO.getJob());
+		emp.setId(empDTO.getId());
+		return emp;
 	}
 	
 }

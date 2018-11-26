@@ -3,7 +3,7 @@ package managementapp.service;
 import java.util.List;
 import java.util.Optional;
 
-import managementapp.builder.MenuDTO;
+import managementapp.dto.MenuDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Menu;
 

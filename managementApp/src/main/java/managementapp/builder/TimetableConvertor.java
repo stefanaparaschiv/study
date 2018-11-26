@@ -1,17 +1,18 @@
-package managementapp.util;
+package managementapp.builder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import managementapp.builder.TimetableDTO;
+import managementapp.dto.TimetableDTO;
 import managementapp.model.Timetable;
 
 public class TimetableConvertor {
 
 	public static TimetableDTO convertToTimetableDTO(Timetable timetable) {
-		TimetableDTO timetableDTO = new TimetableDTO.Builder(timetable.getId())
-				.withClosingHours(timetable.getClosingHours()).withOpeningHours(timetable.getOpeningHours())
-				.withName(timetable.getName()).build();
+		TimetableDTO timetableDTO = new TimetableDTO();
+		timetableDTO.setId(timetable.getId());
+		timetableDTO.setName(timetable.getName());
+		timetableDTO.setOpeningHours(timetable.getOpeningHours());
 		return timetableDTO;
 	}
 

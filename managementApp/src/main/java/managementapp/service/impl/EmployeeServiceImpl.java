@@ -7,13 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import managementapp.builder.EmployeeDTO;
+import managementapp.builder.EmployeeConvertor;
 import managementapp.controller.EmployeeController;
+import managementapp.dto.EmployeeDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.repository.EmployeeRepository;
 import managementapp.service.EmployeeService;
-import managementapp.util.EmployeeConvertor;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {

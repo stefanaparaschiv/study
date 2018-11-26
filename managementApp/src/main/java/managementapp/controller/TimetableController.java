@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import managementapp.builder.TimetableDTO;
+import managementapp.dto.TimetableDTO;
 import managementapp.service.TimetableService;
 
 @RestController

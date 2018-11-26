@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import managementapp.builder.EmployeeDTO;
+import managementapp.dto.EmployeeDTO;
 import managementapp.exceptions.BusinessException;
 import managementapp.model.Employee;
 import managementapp.model.Job;
